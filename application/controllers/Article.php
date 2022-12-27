@@ -1,23 +1,40 @@
 <?php class Article extends CI_Controller {
-	public function index() {
-		$data['articles']=[ [ 'tittle'=>'Foo',
-		'content'=>'Ini artikel tentang foo'
-		],
-		[ 'tittle'=>'Bar',
-		'content'=>'Ini artikel tentang Bar'
-		]];
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('article_model');
+	}
 
-		if (count($data['articles']) > 3) {
+	public function index() {
+		$data['articles'] = $this->article_model->get_published();
+
+		if (count($data['articles']) > 0) {
+			//article ada
 			$this->load->view('articles/list_article.php', $data);
 		}
 
 		else {
+			//empty article
 			$this->load->view('articles/empty_article.php');
 		}
 	}
 
 	public function show ($slug=null) {
-		$this->load->view('articles/show_article.php');
+		//empty slug
+		if (!$slug){
+			show_404();
+		}
+
+		//ambil article dengan slug
+		$data['article'] = $this->article_model->find_by_slug($slug);
+
+		//article not found in database
+		if (!$data['article']){
+			show_404();
+		}
+
+		//show article
+		$this->load->view('articles/show_article.php', $data);
 	}
 }
 

@@ -28,3 +28,26 @@ img {
 	text-align: center;
 	border-top: 1px solid lightgray;
 }
+
+.article {
+	max-width: 740px;
+	margin: 4em auto;
+	padding: 0 2em;
+}
+
+.article .post-title{
+	font-weight: bolder;
+	font-family: sans-serif;
+}
+
+.article .post-meta{
+	margin: 1em 0;
+	font-size: 0.8rem;
+	font-family: sans-serif;
+	color: grey;
+}
+.article .post-body{
+	line-height: 1.6rem;
+}
+	
+
