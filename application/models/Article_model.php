@@ -1,6 +1,6 @@
 <?php 
 class Article_model extends CI_Model{
-    private $_table = 'article';
+    private $_table = 'tb_article';
     public function get_published ($limit = null, $offset = null){
         if ($limit && $offset){
             $query = $this->db->get_where($this->_table, ['draft' => 'false']);
